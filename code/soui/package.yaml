@@ -23,6 +23,8 @@ dependencies:
 
 library:
   source-dirs: src
+  ghc-options:
+    - -Wall
 
 executables:
   soui-exe:
@@ -32,6 +34,7 @@ executables:
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N
+    - -Wall
     dependencies:
     - soui
 
@@ -43,5 +46,6 @@ tests:
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N
+    - -Wall
     dependencies:
     - soui

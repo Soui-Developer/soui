@@ -1,0 +1,23 @@
+
+* Scenario 1: Making a boolean be true [2/10]
+
+The aim of this scenario is to model a world where the only thing we care about is the value of a
+boolean variable, called "worldPeace".
+
+There's only one user, and one action: to set the variable to True.
+
+The expected flow is:
+
+  - [X] The user describes the very simple world model.
+  - [X] The user provides the current state (the variable is currently False).
+  - [ ] The user provides a utility function which says that worldPeace=False is 0 points and
+    worldPeace=True is worth 100 points.
+  - [ ] The system does some thinking, and determines that worldPeace=True is a desirable end state.
+  - [ ] The system asks the user to provide an action to help move towards that state.
+  - [ ] The user provides the "achieveWorldPeace" action, which is said to set the worldPeace
+    variable to True.
+  - [ ] The system does some thinking, and determines that invoking the achieveWorldPeace action
+    will bring about a more optimal state.
+  - [ ] The system asks the user to perform the achieveWorldPeace action.
+  - [ ] The system asks the user to provide the current state.
+  - [ ] The user indicates that worldPeace is True.

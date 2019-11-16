@@ -20,5 +20,3 @@ The expected flow is:
   - [ ] The system does some thinking, and determines that invoking the achieveWorldPeace action
     will bring about a more optimal state.
   - [ ] The system asks the user to perform the achieveWorldPeace action.
-  - [ ] The system asks the user to provide the current state.
-  - [ ] The user indicates that worldPeace is True.

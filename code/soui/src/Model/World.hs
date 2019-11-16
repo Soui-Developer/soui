@@ -2,7 +2,8 @@ module Model.World(
     World(..),
     ValueAssignment(..),
     Value(..),
-    emptyWorld
+    emptyWorld,
+    getVariableValue
 ) where
 
 data World = World {
@@ -21,3 +22,12 @@ emptyWorld :: World
 emptyWorld = World {
     valueAssignments = []
 }
+
+getVariableValue :: World -> String -> Value
+getVariableValue world variableName' =
+    let assignments = valueAssignments world
+        matchingAssignments = filter (\a -> variableName a == variableName') assignments
+    in
+        if null matchingAssignments
+        then error $ "No such variable: " ++ variableName'
+        else assignedValue $ head matchingAssignments

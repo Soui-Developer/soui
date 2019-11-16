@@ -3,6 +3,7 @@ module Computation.Enumeration(allPossibleAssignments) where
 import Model.Variable(Variable(..), VariableType(..))
 import Model.World(Value(..), ValueAssignment(..))
 
+-- |All possible assignments for this variable
 allPossibleAssignments :: Variable -> [ValueAssignment]
 allPossibleAssignments var =
     let varName = name var

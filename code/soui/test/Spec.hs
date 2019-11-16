@@ -2,8 +2,8 @@ import Test.Hspec
 
 import Model.Model(WorldModel(..))
 import Model.Variable(Variable(..), VariableType(..))
-import Kernel(initialState, provideModel, provideWorld, think, bestWorldYetIdentified)
-import Model.World(World(..), ValueAssignment(..), Value(..))
+import Kernel(initialState, provideModel, provideWorld, provideUtilityFunction, think, bestWorldYetIdentified, UtilityFunction)
+import Model.World(World(..), ValueAssignment(..), Value(..), getVariableValue)
 
 main :: IO ()
 main = hspec $ do
@@ -32,3 +32,22 @@ main = hspec $ do
                     ValueAssignment {variableName = "worldPeace", assignedValue = BooleanValue False}
                 ]
             })
+
+            let state4 = provideUtilityFunction worldPeaceUtilityFunction state3
+                state5 = think state4
+
+            -- After some consideration, the system realises that it would be preferable for worldPeace to be true :)
+            bestWorldYetIdentified state5 `shouldBe` (World {
+                    valueAssignments = [
+                        ValueAssignment {variableName = "worldPeace", assignedValue = BooleanValue True}
+                    ]
+                })
+
+worldPeaceUtilityFunction :: UtilityFunction
+worldPeaceUtilityFunction world =
+    let
+        worldPeace = getVariableValue world "worldPeace"
+    in
+        case worldPeace of
+            BooleanValue True -> 100
+            BooleanValue False -> 0

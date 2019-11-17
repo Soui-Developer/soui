@@ -6,6 +6,7 @@ module Model.Variable(
 data Variable = Variable {
     name :: String,
     variableType :: VariableType
-}
+} deriving (Eq)
 
 data VariableType = BooleanType
+    deriving (Eq)

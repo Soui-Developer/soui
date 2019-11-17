@@ -7,7 +7,7 @@ import Model.Variable
 
 data WorldModel = WorldModel {
     variables :: [Variable]
-}
+} deriving (Eq)
 
 emptyModel :: WorldModel
 emptyModel = WorldModel {

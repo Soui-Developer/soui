@@ -2,24 +2,39 @@ import Test.Hspec
 
 import Model.Model(WorldModel(..))
 import Model.Variable(Variable(..), VariableType(..))
-import Kernel(initialState, provideModel, provideWorld, provideUtilityFunction, think, bestWorldYetIdentified, UtilityFunction)
+import Kernel(
+    initialState,
+    provideModel,
+    provideWorld,
+    provideUtilityFunction,
+    think,
+    bestWorldYetIdentified,
+    messagesForUser,
+    UtilityFunction)
 import Model.World(World(..), ValueAssignment(..), Value(..), getVariableValue)
+import Model.Message(Message(..))
 
 main :: IO ()
 main = hspec $ do
     describe "Kernel" $ do
         it "supports Scenario 1 - Making a boolean be true" $ do
-            let state0 = initialState
-                model' = WorldModel {
-                    variables = [
-                        Variable {
-                            name = "worldPeace",
-                            variableType = BooleanType
-                        }
-                    ]
-                }
-                state1 = provideModel model' state0
-                world' = World {
+            let state0 = think initialState
+
+            messagesForUser state0 `shouldBe` [InitialModelRequest]
+
+            let model' = WorldModel {
+                                variables = [
+                                    Variable {
+                                        name = "worldPeace",
+                                        variableType = BooleanType
+                                    }
+                                ]
+                            }
+                state1 = think $ provideModel model' state0
+
+            messagesForUser state1 `shouldBe` [InitialWorldRequest]
+
+            let world' = World {
                     valueAssignments = [
                         ValueAssignment {variableName = "worldPeace", assignedValue = BooleanValue False}
                     ]
@@ -33,15 +48,21 @@ main = hspec $ do
                 ]
             })
 
+            messagesForUser state3 `shouldBe` [InitialUtilityFunctionRequest]
+
             let state4 = provideUtilityFunction worldPeaceUtilityFunction state3
                 state5 = think state4
+                idealWorld = World {
+                                 valueAssignments = [
+                                     ValueAssignment {variableName = "worldPeace", assignedValue = BooleanValue True}
+                                 ]
+                             }
 
             -- After some consideration, the system realises that it would be preferable for worldPeace to be true :)
-            bestWorldYetIdentified state5 `shouldBe` (World {
-                    valueAssignments = [
-                        ValueAssignment {variableName = "worldPeace", assignedValue = BooleanValue True}
-                    ]
-                })
+            bestWorldYetIdentified state5 `shouldBe` idealWorld
+
+            messagesForUser state5 `shouldBe` [ActionsTowardWorldRequest idealWorld]
+
 
 worldPeaceUtilityFunction :: UtilityFunction
 worldPeaceUtilityFunction world =

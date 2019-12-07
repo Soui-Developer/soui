@@ -1,5 +1,7 @@
 
-* Scenario 1: Making a boolean be true [5/8]
+* Scenarios
+
+** Scenario 1: Making a boolean be true [8/8]
 
 The aim of this scenario is to model a world where the only thing we care about is the value of a
 boolean variable, called "worldPeace".
@@ -15,8 +17,17 @@ The expected flow is:
   - [X] The system does some thinking, and determines that worldPeace=True is the most desirable end
     state.
   - [X] The system asks the user to provide an action to help move towards that state.
-  - [ ] The user provides the "achieveWorldPeace" action, which is said to set the worldPeace
+  - [X] The user provides the "achieveWorldPeace" action, which is said to set the worldPeace
     variable to True.
-  - [ ] The system does some thinking, and determines that invoking the achieveWorldPeace action
+  - [X] The system does some thinking, and determines that invoking the achieveWorldPeace action
     will bring about a more optimal state.
-  - [ ] The system asks the user to perform the achieveWorldPeace action.
+  - [X] The system asks the user to perform the achieveWorldPeace action.
+
+* Later Considerations
+
+  - Sequence of actions
+  - Time
+  - Multiple users
+  - User performance evaluation
+  - Action failure
+  - Action deselection by the user

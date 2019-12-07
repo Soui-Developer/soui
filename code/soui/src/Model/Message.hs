@@ -1,6 +1,7 @@
 module Model.Message(Message(..)) where
 
 import Model.World(World)
+import Model.Action(ActionName)
 
 data Message =
     -- | A request to provide the initial world model
@@ -11,4 +12,6 @@ data Message =
     | InitialUtilityFunctionRequest
     -- | A request to add some action(s) which may help us move towards the given world state
     | ActionsTowardWorldRequest World
+    -- | A request to perform a specific action
+    | PerformActionRequest ActionName
     deriving (Show, Eq)

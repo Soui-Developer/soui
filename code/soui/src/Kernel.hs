@@ -2,7 +2,7 @@ module Kernel(
     SystemState(bestWorldYetIdentified),
     initialState,
     provideModel,
-    provideWorld,
+    provideCurrentWorld,
     provideUtilityFunction,
     provideAction,
     think,
@@ -60,8 +60,8 @@ provideModel :: WorldModel -> SystemState -> SystemState
 provideModel model' state =
     state{model = model'}
 
-provideWorld :: World -> SystemState -> SystemState
-provideWorld world' state =
+provideCurrentWorld :: World -> SystemState -> SystemState
+provideCurrentWorld world' state =
     state{
         currentWorld = world',
         actionConsequences = Nothing

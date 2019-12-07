@@ -6,7 +6,7 @@ import qualified Model.Variable as Variable
 import Kernel(
     initialState,
     provideModel,
-    provideWorld,
+    provideCurrentWorld,
     provideUtilityFunction,
     provideAction,
     think,
@@ -43,7 +43,7 @@ main = hspec $ do
                         ValueAssignment {variableName = "worldPeace", assignedValue = BooleanValue False}
                     ]
                 }
-                state2 = provideWorld world' state1
+                state2 = provideCurrentWorld world' state1
                 state3 = think state2
 
             bestWorldYetIdentified state3 `shouldBe` (World {
